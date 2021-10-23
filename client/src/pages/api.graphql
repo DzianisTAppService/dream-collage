@@ -1,0 +1,8 @@
+query DreamsQuery {
+    dreams {
+        _id
+        name
+        time
+        rating
+    }
+}
