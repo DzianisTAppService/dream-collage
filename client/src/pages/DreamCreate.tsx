@@ -14,8 +14,6 @@ const DREAM_MUTATIONS = gql`
   }
 `;
 
-const DreamCreate: React.FC = () => {
-  return <DreamForm mutation={DREAM_MUTATIONS} />;
-};
+const DreamCreate: React.FC = () => <DreamForm mutation={DREAM_MUTATIONS} />;
 
 export default DreamCreate;

@@ -1,5 +1,4 @@
-import React from 'react';
-import { TUpdateDeleteDream } from './UpdateDream';
+import React, { FC } from 'react';
 import { Button } from '@material-ui/core';
 import { gql } from 'graphql-tag';
 
@@ -13,7 +12,11 @@ const DREAM_MUTATIONS = gql`
   }
 `;
 
-const DeleteDream: React.FC<TUpdateDeleteDream> = ({ id }) => {
+interface Props {
+  id: string;
+}
+
+const DeleteDream: FC<Props> = ({ id }) => {
   const handleBackToDreams = () => {
     window.location.reload();
   };

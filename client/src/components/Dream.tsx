@@ -1,6 +1,4 @@
-import React, { FunctionComponent } from 'react';
-import { UpdateDream, DeleteDream } from './index';
-import defaultPicture from '../assets/images/flat.jpg';
+import React, { FC } from 'react';
 import {
   Card,
   Grid,
@@ -11,6 +9,10 @@ import {
   Icon,
   Paper,
 } from '@material-ui/core';
+
+import { UpdateDream, DeleteDream } from './index';
+import defaultPicture from '../assets/images/flat.jpg';
+import { Dream as DreamType } from '../generated/graphql';
 
 const useStyles = makeStyles({
   wrapper: {
@@ -53,14 +55,12 @@ const useStyles = makeStyles({
   },
 });
 
-const Dream: FunctionComponent<Props> = (props) => {
-  const {
-    dream,
-    dream: { _id, image = defaultPicture },
-  } = props;
-  const classes = useStyles();
+interface Props {
+  dream: DreamType;
+}
 
-  if (!_id) return null;
+const Dream: FC<Props> = ({ dream, dream: { _id: id, image } }) => {
+  const classes = useStyles();
 
   return (
     <Grid item xs={6}>
@@ -75,7 +75,7 @@ const Dream: FunctionComponent<Props> = (props) => {
             <div className={classes.mediaWrapper}>
               <CardMedia
                 className={classes.media}
-                image={image}
+                image={image || defaultPicture}
                 title={dream.name}
               />
               <div className={classes.rating}>
@@ -85,8 +85,8 @@ const Dream: FunctionComponent<Props> = (props) => {
             </div>
           </CardContent>
           <Grid container justify="flex-end" className={classes.footer}>
-            <UpdateDream id={_id} />
-            <DeleteDream id={_id} />
+            <UpdateDream id={id} />
+            <DeleteDream id={id} />
           </Grid>
         </Card>
       </Paper>
@@ -95,17 +95,3 @@ const Dream: FunctionComponent<Props> = (props) => {
 };
 
 export default Dream;
-
-interface OwnProps {
-  dream: TDream;
-}
-
-export type TDream = {
-  _id?: string;
-  name: string;
-  rating: number | null;
-  time: string;
-  image?: string;
-};
-
-type Props = OwnProps;

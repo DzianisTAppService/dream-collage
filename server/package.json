@@ -16,8 +16,7 @@
   "scripts": {
     "client": "npm start --prefix ../client",
     "server": "nodemon index.js",
-    "dev": "concurrently \"npm:server\" \"npm:client\"",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "dev": "concurrently \"npm:server\" \"npm:client\""
   },
   "eslintConfig": {
     "extends": [

@@ -16,8 +16,9 @@ export type Scalars = {
 
 export type Dream = {
   __typename?: 'Dream';
-  _id?: Maybe<Scalars['ID']>;
-  name?: Maybe<Scalars['String']>;
+  _id: Scalars['ID'];
+  image?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   rating?: Maybe<Scalars['Int']>;
   time?: Maybe<Scalars['String']>;
 };
@@ -63,7 +64,7 @@ export type RootQueryTypeDreamArgs = {
 export type DreamsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type DreamsQueryQuery = { __typename?: 'RootQueryType', dreams?: Array<{ __typename?: 'Dream', _id?: string | null | undefined, name?: string | null | undefined, time?: string | null | undefined, rating?: number | null | undefined } | null | undefined> | null | undefined };
+export type DreamsQueryQuery = { __typename?: 'RootQueryType', dreams?: Array<{ __typename?: 'Dream', _id: string, name: string, time?: string | null | undefined, rating?: number | null | undefined, image?: string | null | undefined } | null | undefined> | null | undefined };
 
 
 export const DreamsQueryDocument = gql`
@@ -73,6 +74,7 @@ export const DreamsQueryDocument = gql`
     name
     time
     rating
+    image
   }
 }
     `;

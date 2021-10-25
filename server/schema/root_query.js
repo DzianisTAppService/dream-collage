@@ -1,13 +1,13 @@
-const graphql = require('graphql');
-const DreamType = require('./types/DreamType');
+const graphql = require("graphql");
+const DreamType = require("./types/DreamType");
 const mongoose = require("mongoose");
 const { GraphQLObjectType, GraphQLList, GraphQLID } = graphql;
-require('../models');
+require("../models");
 
-const DreamInstance = mongoose.model('dream');
+const DreamInstance = mongoose.model("dream");
 
 const RootQuery = new GraphQLObjectType({
-  name: 'RootQueryType',
+  name: "RootQueryType",
   fields: {
     dream: {
       type: DreamType,
@@ -24,7 +24,7 @@ const RootQuery = new GraphQLObjectType({
         return DreamInstance.find();
       },
     },
-  }
+  },
 });
 
 module.exports = RootQuery;

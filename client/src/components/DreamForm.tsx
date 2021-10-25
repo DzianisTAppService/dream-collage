@@ -1,33 +1,26 @@
-import React, { FunctionComponent, useState } from 'react';
-import { TDream } from './Dream';
+import React, { FC, useState } from 'react';
+import { Dream as DreamType } from '../generated/graphql';
 import { Mutation } from 'react-apollo';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 
 interface OwnProps extends RouteComponentProps {
-  dreamData?: TDream;
+  dreamData?: DreamType;
   mutation: any;
   updateStatus?: boolean;
 }
 
 type Props = OwnProps;
 
-const initialState: TDream = {
-  name: '',
-  rating: null,
-  time: '',
-};
-
-const DreamForm: FunctionComponent<Props> = (props) => {
-  const { dreamData, history, mutation, updateStatus = false } = props;
-  const [dreamInfo, setDreamInfo] = useState<TDream>(dreamData || initialState);
-
-  const { rating, name, time, _id: id } = dreamInfo;
-
-  const handleChangeInputName = (event: { target: { value: any } }) => {
-    const name = event.target.value;
-    setDreamInfo({ ...dreamInfo, name });
-  };
+const DreamForm: FC<Props> = ({
+  dreamData = {},
+  history,
+  mutation,
+  updateStatus = false,
+}) => {
+  const [name, setName] = useState<string>(dreamData.name || '');
+  const [rating, setRating] = useState<number>(dreamData.rating || 0);
+  const [time, setTime] = useState<string>(dreamData.time || '');
 
   const handleChangeInputRating = async (event: {
     target: { validity: { valid: any }; value: any };
@@ -36,12 +29,7 @@ const DreamForm: FunctionComponent<Props> = (props) => {
       ? event.target.value
       : rating;
 
-    setDreamInfo({ ...dreamInfo, rating: +elementRating });
-  };
-
-  const handleChangeInputTime = async (event: { target: { value: any } }) => {
-    const time = event.target.value;
-    setDreamInfo({ ...dreamInfo, time });
+    setRating(+elementRating);
   };
 
   const handleBackToDreams = async () => {
@@ -60,7 +48,7 @@ const DreamForm: FunctionComponent<Props> = (props) => {
               className="form-control"
               type="text"
               value={name || ''}
-              onChange={handleChangeInputName}
+              onChange={(e) => setName(e.target.value)}
             />
           </Box>
 
@@ -85,14 +73,16 @@ const DreamForm: FunctionComponent<Props> = (props) => {
               className="form-control"
               type="text"
               value={time || ''}
-              onChange={handleChangeInputTime}
+              onChange={(e) => setTime(e.target.value)}
             />
           </Box>
 
           {updateStatus ? (
             <button
               onClick={() => {
-                updateDream({ variables: { id, name, rating, time } });
+                updateDream({
+                  variables: { id: dreamData._id, name, rating, time },
+                });
               }}
             >
               Update
