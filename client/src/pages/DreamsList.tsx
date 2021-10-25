@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { Box, Grid } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
+import { Box, Grid, Link, Typography } from '@material-ui/core';
 
 import { Dream } from '../components';
 import { useDreamsQueryQuery } from '../generated/graphql';
@@ -17,11 +18,29 @@ const DreamList: FC = () => {
 
   return (
     <Box p={5}>
-      <h1 className="display-4 my-4">Dreams</h1>
+      <Box mb={4}>
+        <Typography variant="h4" align="center">
+          Dreams
+        </Typography>
+      </Box>
+
       <Grid container direction="row" spacing={3} justify="center">
-        {dreams.map((dream: any) => (
-          <Dream dream={dream} key={dream._id} />
-        ))}
+        {dreams.length ? (
+          dreams.map((dream: any) => <Dream dream={dream} key={dream._id} />)
+        ) : (
+          <Box display="flex" alignItems="center" alignSelf="start">
+            <h3>You have no dreams yet, lets create the first:</h3>
+            <Box ml={2}>
+              <RouterLink
+                component={Link}
+                to="/dream/create"
+                className="nav-link"
+              >
+                Create Dream
+              </RouterLink>
+            </Box>
+          </Box>
+        )}
       </Grid>
     </Box>
   );
