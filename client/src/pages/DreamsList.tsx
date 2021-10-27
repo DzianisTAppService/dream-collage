@@ -24,7 +24,7 @@ const DreamList: FC = () => {
         </Typography>
       </Box>
 
-      <Grid container direction="row" spacing={3} justify="center">
+      <Grid container direction="row" spacing={3} justifyContent="center">
         {dreams.length ? (
           dreams.map((dream: any) => <Dream dream={dream} key={dream._id} />)
         ) : (
