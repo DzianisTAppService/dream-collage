@@ -13,6 +13,7 @@ import { StarRate } from '@material-ui/icons';
 
 import { UpdateDream, DeleteDream } from './index';
 import defaultPicture from '../assets/images/flat.jpg';
+
 import { Dream as DreamType } from '../generated/graphql';
 
 const useStyles = makeStyles({

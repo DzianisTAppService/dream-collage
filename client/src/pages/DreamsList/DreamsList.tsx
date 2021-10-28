@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Grid, Link, Typography } from '@material-ui/core';
 
-import { Dream } from '../components';
-import { useDreamsQueryQuery } from '../generated/graphql';
+import { Dream } from '../../components';
+import { useDreamsQueryQuery } from '../../generated/graphql';
 
 const DreamList: FC = () => {
   const { loading, data, error } = useDreamsQueryQuery();
