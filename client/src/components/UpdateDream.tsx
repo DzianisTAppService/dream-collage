@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 
 interface Props {
@@ -6,12 +7,13 @@ interface Props {
 }
 
 const UpdateDream: FC<Props> = (props) => {
-  const updateUser = (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-    window.location.href = `http://localhost:8000/dream/update/${props.id}`;
-  };
+  const { push } = useHistory();
   return (
-    <Button variant="contained" color="primary" onClick={updateUser}>
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={() => push(`/dream/update/${props.id}`)}
+    >
       Update
     </Button>
   );

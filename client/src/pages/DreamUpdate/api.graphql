@@ -1,0 +1,17 @@
+query getDream($id: ID) {
+	dream(_id: $id) {
+		_id
+		name
+		time
+		rating
+	}
+}
+
+mutation updateDream($id: ID!, $name: String, $time: String, $rating: Int) {
+	updateDream(_id: $id, name: $name, time: $time, rating: $rating) {
+		_id
+		name
+		time
+		rating
+	}
+}
