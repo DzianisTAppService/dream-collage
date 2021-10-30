@@ -10,7 +10,7 @@ interface Props {
 }
 
 const DreamContainer: FC<Props> = ({ dream }) => {
-  const [deleteDream, { loading, data, error }] = useDeleteDreamMutation();
+  const [deleteDream, { loading, error }] = useDeleteDreamMutation();
 
   const handleDeleteDream = async () => {
     await deleteDream({ variables: { id: dream._id } });
