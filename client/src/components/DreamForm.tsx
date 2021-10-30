@@ -4,7 +4,7 @@ import { Box } from '@material-ui/core';
 
 import { LoadingComponent } from '.';
 
-import { Dream as DreamType } from '../generated/graphql';
+import { Dream as DreamType } from '../__generated__/types';
 
 interface Props {
   dreamData?: DreamType;

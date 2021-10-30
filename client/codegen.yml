@@ -1,12 +1,36 @@
 overwrite: true
 schema: "http://localhost:5000/graphql"
-documents: "./src/**/*.graphql"
+config:
+  noSchemaStitching: true
+  namingConvention: keep
 generates:
-  src/generated/graphql.tsx:
+  src/__generated__/types.ts:
+    - typescript
+  src/:
+    preset: near-operation-file
+    documents: './src/**/*.graphql'
+    presetConfig:
+      extension: .generated.tsx
+      baseTypesPath: __generated__/types.ts
     plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
+      - typescript-operations
+      - typescript-react-apollo
     config:
-      withHooks: true
-#      avoidOptionals: true
+      preResolveTypes: true
+  src/__generated__/schema.json:
+    plugins:
+      - introspection
+  src/__generated__/resolvers.d.ts:
+    plugins:
+#      https://github.com/dotansimha/graphql-code-generator/issues/1219
+#      - add: |
+#          /* tslint:disable */
+#          /* eslint-disable */
+#          import { DeepPartial } from 'utility-types';
+      - typescript
+      - typescript-resolvers
+    config:
+      resolverTypeWrapperSignature: Promise<DeepPartial<T>> | DeepPartial<T>
+hooks:
+  afterAllFileWrite:
+    - prettier --write

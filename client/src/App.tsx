@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 
-import { DreamCreate, DreamsList, DreamUpdate } from './pages';
+import { DreamCreate, DreamUpdate, DreamsListContainer } from './pages';
 import { NavBar } from './components';
 
 const App: FC = () => (
@@ -14,7 +14,7 @@ const App: FC = () => (
 
       <Grid item>
         <Switch>
-          <Route path="/dreams/list" exact component={DreamsList} />
+          <Route path="/dreams/list" exact component={DreamsListContainer} />
           <Route path="/dream/create" exact component={DreamCreate} />
           <Route path="/dream/update/:id" exact component={DreamUpdate} />
         </Switch>

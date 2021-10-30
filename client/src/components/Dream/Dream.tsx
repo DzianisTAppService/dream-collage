@@ -8,13 +8,15 @@ import {
   Paper,
   Box,
   Typography,
+  Button,
 } from '@material-ui/core';
 import { StarRate } from '@material-ui/icons';
 
-import { UpdateDream, DeleteDream } from './index';
-import defaultPicture from '../assets/images/flat.jpg';
+import { UpdateDream } from '../index';
+import defaultPicture from '../../assets/images/flat.jpg';
 
-import { Dream as DreamType } from '../generated/graphql';
+import { Dream as DreamType } from '../../__generated__/types';
+import { useDeleteDreamMutation } from './api.generated';
 
 const useStyles = makeStyles({
   media: {
@@ -30,6 +32,12 @@ interface Props {
 
 const Dream: FC<Props> = ({ dream, dream: { _id: id, image } }) => {
   const classes = useStyles();
+  const [deleteDream, { loading, data, error }] = useDeleteDreamMutation();
+
+  const handleDeleteDream = async () => {
+    await deleteDream({ variables: { id } });
+    // window.location.reload();
+  };
 
   return (
     <Grid item xs={6}>
@@ -72,7 +80,15 @@ const Dream: FC<Props> = ({ dream, dream: { _id: id, image } }) => {
           </Box>
           <Box pt={2} pr={2} pb={2} display="flex" justifyContent="flex-end">
             <UpdateDream id={id} />
-            <DeleteDream id={id} />
+            <Box ml={2}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={handleDeleteDream}
+              >
+                Delete
+              </Button>
+            </Box>
           </Box>
         </Card>
       </Paper>

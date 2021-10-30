@@ -1,7 +1,6 @@
 import NavBar from './NavBar';
-import Dream from './Dream';
-import DeleteDream from './DeleteDream';
+import Dream from './Dream/Dream';
 import UpdateDream from './UpdateDream';
 import LoadingComponent from './LoadingComponent';
 
-export { NavBar, Dream, DeleteDream, UpdateDream, LoadingComponent };
+export { NavBar, Dream, UpdateDream, LoadingComponent };

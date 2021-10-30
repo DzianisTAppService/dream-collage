@@ -4,10 +4,7 @@ import { useParams } from 'react-router-dom';
 import DreamForm from '../../components/DreamForm';
 import { LoadingComponent } from '../../components';
 
-import {
-  useGetDreamQuery,
-  useUpdateDreamMutation,
-} from '../../generated/graphql';
+import { useGetDreamQuery, useUpdateDreamMutation } from './api.generated';
 
 const DreamUpdate: FC = () => {
   const { id } = useParams<{ id: string }>();

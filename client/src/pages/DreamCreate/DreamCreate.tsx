@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DreamForm from '../../components/DreamForm';
-import { useCreateDreamMutation } from '../../generated/graphql';
+import { useCreateDreamMutation } from './api.generated';
 
 const DreamCreate: React.FC = () => {
   const createDreamMutation = useCreateDreamMutation();
