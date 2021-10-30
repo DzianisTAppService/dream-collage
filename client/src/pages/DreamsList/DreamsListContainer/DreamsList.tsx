@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Grid, Link, Typography } from '@material-ui/core';
 
-import { Dream } from '../../components';
+import DreamContainer from '../DreamContainer/DreamContainer';
 
 import { DreamsQueryQuery } from './api.generated';
 
@@ -20,7 +20,9 @@ const DreamList: FC<Props> = ({ data }) => (
 
     <Grid container direction="row" spacing={3} justifyContent="center">
       {data.length ? (
-        data.map((dream: any) => <Dream dream={dream} key={dream._id} />)
+        data.map((dream: any) => (
+          <DreamContainer dream={dream} key={dream._id} />
+        ))
       ) : (
         <Box display="flex" alignItems="center" alignSelf="start">
           <h3>You have no dreams yet, lets create the first:</h3>

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Box } from '@material-ui/core';
 
-import { LoadingComponent } from '../../components';
+import { LoadingComponent } from '../../../components';
 import DreamsList from './DreamsList';
 import { useDreamsQueryQuery } from './api.generated';
 

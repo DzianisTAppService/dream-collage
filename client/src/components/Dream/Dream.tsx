@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Card,
   Grid,
@@ -12,11 +13,9 @@ import {
 } from '@material-ui/core';
 import { StarRate } from '@material-ui/icons';
 
-import { UpdateDream } from '../index';
 import defaultPicture from '../../assets/images/flat.jpg';
 
 import { Dream as DreamType } from '../../__generated__/types';
-import { useDeleteDreamMutation } from './api.generated';
 
 const useStyles = makeStyles({
   media: {
@@ -27,17 +26,13 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  dream: DreamType;
+  data: DreamType;
+  deleteDream: () => void;
 }
 
-const Dream: FC<Props> = ({ dream, dream: { _id: id, image } }) => {
+const Dream: FC<Props> = ({ data, data: { _id: id, image }, deleteDream }) => {
+  const { push } = useHistory();
   const classes = useStyles();
-  const [deleteDream, { loading, data, error }] = useDeleteDreamMutation();
-
-  const handleDeleteDream = async () => {
-    await deleteDream({ variables: { id } });
-    // window.location.reload();
-  };
 
   return (
     <Grid item xs={6}>
@@ -48,9 +43,9 @@ const Dream: FC<Props> = ({ dream, dream: { _id: id, image } }) => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <CardHeader title={dream.name} />
+            <CardHeader title={data.name} />
             <Box pr={2}>
-              <Typography>{dream.time}</Typography>
+              <Typography>{data.time}</Typography>
             </Box>
           </Box>
 
@@ -59,7 +54,7 @@ const Dream: FC<Props> = ({ dream, dream: { _id: id, image } }) => {
               <CardMedia
                 className={classes.media}
                 image={image || defaultPicture}
-                title={dream.name}
+                title={data.name}
               />
               <Box
                 position="absolute"
@@ -73,18 +68,24 @@ const Dream: FC<Props> = ({ dream, dream: { _id: id, image } }) => {
                 borderRadius="3px"
                 color="#af9723"
               >
-                <Typography variant="h5">{dream.rating}</Typography>
+                <Typography variant="h5">{data.rating}</Typography>
                 <StarRate fontSize="large" />
               </Box>
             </Box>
           </Box>
           <Box pt={2} pr={2} pb={2} display="flex" justifyContent="flex-end">
-            <UpdateDream id={id} />
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => push(`/dream/update/${id}`)}
+            >
+              Update
+            </Button>
             <Box ml={2}>
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={handleDeleteDream}
+                onClick={deleteDream}
               >
                 Delete
               </Button>
