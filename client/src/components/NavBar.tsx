@@ -6,7 +6,7 @@ const NavBar: FC = () => {
   const NavItems = [
     {
       name: 'Dreams',
-      url: '/dreams/list',
+      url: '/dreams',
     },
     {
       name: 'Create Dream',
@@ -26,7 +26,7 @@ const NavBar: FC = () => {
         {NavItems.map(({ name, url }) => (
           <Grid item key={name}>
             <Box mr={2}>
-              <RouterLink component={Link} to={url} className="nav-link">
+              <RouterLink component={Link} to={url}>
                 {name}
               </RouterLink>
             </Box>

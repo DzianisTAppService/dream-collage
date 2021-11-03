@@ -1,5 +1,5 @@
 const graphql = require("graphql");
-const DreamType = require("./types/DreamType");
+const { DreamType } = require("./types");
 const mongoose = require("mongoose");
 const { GraphQLObjectType, GraphQLList, GraphQLID } = graphql;
 require("../models");

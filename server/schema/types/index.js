@@ -18,4 +18,9 @@ const DreamType = new GraphQLObjectType({
   }),
 });
 
-module.exports = DreamType;
+const DeleteDreamType = new GraphQLObjectType({
+  name: "DeleteDream",
+  fields: () => ({ deletedCount: { type: GraphQLInt } }),
+});
+
+module.exports = { DreamType, DeleteDreamType };

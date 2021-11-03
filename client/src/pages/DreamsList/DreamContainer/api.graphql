@@ -1,5 +1,5 @@
 mutation DeleteDream($id: ID!) {
 	deleteDream(_id: $id) {
-		name
+		deletedCount
 	}
 }

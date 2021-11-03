@@ -20,6 +20,29 @@
       },
       {
         "kind": "OBJECT",
+        "name": "DeleteDream",
+        "description": null,
+        "fields": [
+          {
+            "name": "deletedCount",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "Dream",
         "description": null,
         "fields": [
@@ -190,7 +213,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "Dream",
+              "name": "DeleteDream",
               "ofType": null
             },
             "isDeprecated": false,

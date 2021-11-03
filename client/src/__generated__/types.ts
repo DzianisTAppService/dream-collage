@@ -17,6 +17,11 @@ export type Scalars = {
   Float: number;
 };
 
+export type DeleteDream = {
+  __typename?: 'DeleteDream';
+  deletedCount?: Maybe<Scalars['Int']>;
+};
+
 export type Dream = {
   __typename?: 'Dream';
   _id: Scalars['ID'];
@@ -29,7 +34,7 @@ export type Dream = {
 export type RootMutationType = {
   __typename?: 'RootMutationType';
   createDream?: Maybe<Dream>;
-  deleteDream?: Maybe<Dream>;
+  deleteDream?: Maybe<DeleteDream>;
   updateDream?: Maybe<Dream>;
 };
 

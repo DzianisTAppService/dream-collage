@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Box, LinearProgress } from '@material-ui/core';
 
 const LoadingComponent: FC = () => (
-  <Box sx={{ width: '100%' }}>
+  <Box sx={{ width: '100%' }} position="absolute" top={0}>
     <LinearProgress />
   </Box>
 );

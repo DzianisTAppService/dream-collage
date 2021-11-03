@@ -9,13 +9,16 @@ export type DeleteDreamMutationVariables = Types.Exact<{
 
 export type DeleteDreamMutation = {
   __typename?: 'RootMutationType';
-  deleteDream?: { __typename?: 'Dream'; name: string } | null | undefined;
+  deleteDream?:
+    | { __typename?: 'DeleteDream'; deletedCount?: number | null | undefined }
+    | null
+    | undefined;
 };
 
 export const DeleteDreamDocument = gql`
   mutation DeleteDream($id: ID!) {
     deleteDream(_id: $id) {
-      name
+      deletedCount
     }
   }
 `;

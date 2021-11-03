@@ -21,6 +21,11 @@ export type Scalars = {
   Float: number;
 };
 
+export type DeleteDream = {
+  __typename?: 'DeleteDream';
+  deletedCount?: Maybe<Scalars['Int']>;
+};
+
 export type Dream = {
   __typename?: 'Dream';
   _id: Scalars['ID'];
@@ -33,7 +38,7 @@ export type Dream = {
 export type RootMutationType = {
   __typename?: 'RootMutationType';
   createDream?: Maybe<Dream>;
-  deleteDream?: Maybe<Dream>;
+  deleteDream?: Maybe<DeleteDream>;
   updateDream?: Maybe<Dream>;
 };
 
@@ -172,6 +177,7 @@ export type DirectiveResolverFn<
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  DeleteDream: ResolverTypeWrapper<DeleteDream>;
   Dream: ResolverTypeWrapper<Dream>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -183,12 +189,25 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
+  DeleteDream: DeleteDream;
   Dream: Dream;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
   RootMutationType: {};
   RootQueryType: {};
   String: Scalars['String'];
+};
+
+export type DeleteDreamResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['DeleteDream'] = ResolversParentTypes['DeleteDream']
+> = {
+  deletedCount?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type DreamResolvers<
@@ -214,7 +233,7 @@ export type RootMutationTypeResolvers<
     RequireFields<RootMutationTypecreateDreamArgs, never>
   >;
   deleteDream?: Resolver<
-    Maybe<ResolversTypes['Dream']>,
+    Maybe<ResolversTypes['DeleteDream']>,
     ParentType,
     ContextType,
     RequireFields<RootMutationTypedeleteDreamArgs, never>
@@ -245,6 +264,7 @@ export type RootQueryTypeResolvers<
 };
 
 export type Resolvers<ContextType = any> = {
+  DeleteDream?: DeleteDreamResolvers<ContextType>;
   Dream?: DreamResolvers<ContextType>;
   RootMutationType?: RootMutationTypeResolvers<ContextType>;
   RootQueryType?: RootQueryTypeResolvers<ContextType>;

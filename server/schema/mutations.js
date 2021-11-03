@@ -1,13 +1,13 @@
-const graphql = require('graphql');
-const DreamType = require('./types/DreamType');
+const graphql = require("graphql");
+const { DreamType, DeleteDreamType } = require("./types");
 const mongoose = require("mongoose");
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLInt } = graphql;
-require('../models');
+require("../models");
 
-const DreamInstance = mongoose.model('dream');
+const DreamInstance = mongoose.model("dream");
 
 const mutations = new GraphQLObjectType({
-  name: 'RootMutationType',
+  name: "RootMutationType",
   fields: {
     createDream: {
       type: DreamType,
@@ -17,7 +17,7 @@ const mutations = new GraphQLObjectType({
         rating: { type: GraphQLInt },
       },
       resolve(parent, args) {
-        return (new DreamInstance(args)).save();
+        return new DreamInstance(args).save();
       },
     },
     updateDream: {
@@ -33,11 +33,11 @@ const mutations = new GraphQLObjectType({
       },
     },
     deleteDream: {
-      type: DreamType,
+      type: DeleteDreamType,
       args: {
         _id: { type: GraphQLID },
       },
-      resolve(parent, args) {
+      async resolve(parent, args) {
         return DreamInstance.deleteOne(args);
       },
     },

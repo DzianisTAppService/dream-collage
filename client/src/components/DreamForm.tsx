@@ -33,7 +33,7 @@ const DreamForm: FC<Props> = ({
   };
 
   const handleBackToDreams = () => {
-    push('/dreams/list');
+    push('/dreams');
   };
 
   const handleSubmit = async () => {
