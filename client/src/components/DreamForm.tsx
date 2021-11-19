@@ -1,6 +1,7 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Box } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { LoadingComponent } from '.';
 
@@ -12,37 +13,36 @@ interface Props {
   updateStatus?: boolean;
 }
 
+interface FormData {
+  name: string;
+  rating: number;
+  time: string;
+}
+
 const DreamForm: FC<Props> = ({
-  dreamData = {},
+  dreamData: { name, rating, time, _id: id } = {},
   mutation: [mutation, { loading }],
   updateStatus = false,
 }) => {
-  const [name, setName] = useState<string>(dreamData.name || '');
-  const [rating, setRating] = useState<number>(dreamData.rating || 0);
-  const [time, setTime] = useState<string>(dreamData.time || '');
   const { push } = useHistory();
 
-  const handleChangeInputRating = async (event: {
-    target: { validity: { valid: any }; value: any };
-  }) => {
-    const elementRating = event.target.validity.valid
-      ? event.target.value
-      : rating;
-
-    setRating(+elementRating);
+  const defaultValues = {
+    name: name,
+    rating: rating || 0,
+    time: time || '',
   };
 
-  const handleBackToDreams = () => {
-    push('/dreams');
-  };
+  const { register, handleSubmit } = useForm<FormData>({ defaultValues });
 
-  const handleSubmit = async () => {
-    const variables = updateStatus
-      ? { id: dreamData._id, name, rating, time }
-      : { name, rating, time };
+  const handleBackToDreams = () => push('/dreams');
 
+  const onSubmit: SubmitHandler<FormData> = async ({ name, rating, time }) => {
     try {
-      await mutation({ variables });
+      await mutation({
+        variables: updateStatus
+          ? { id, name, rating, time }
+          : { name, rating, time },
+      });
       handleBackToDreams();
     } catch (err) {
       console.log(err);
@@ -50,51 +50,49 @@ const DreamForm: FC<Props> = ({
   };
 
   return (
-    <Box className="form-group" mx={4}>
-      {loading && <LoadingComponent />}
-      <h1 className="h1">Create Dream</h1>
+    <Grid container>
+      <Grid item xs={12}>
+        <Box mx={4} p={5}>
+          {loading && <LoadingComponent />}
+          <Typography variant="h4" align="center">
+            Create Dream
+          </Typography>
 
-      <Box>
-        <label>Name: </label>
-        <input
-          className="form-control"
-          type="text"
-          value={name || ''}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </Box>
+          <Box mt={4}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Box>
+                <label>Name: </label>
+                <input type="text" {...register('name')} />
+              </Box>
 
-      <Box>
-        <label>Rating: </label>
-        <input
-          className="form-control"
-          type="number"
-          step="0.1"
-          lang="en-US"
-          min="0"
-          max="10"
-          pattern="[0-9]+([,\.][0-9]+)?"
-          value={rating || ''}
-          onChange={handleChangeInputRating}
-        />
-      </Box>
+              <Box>
+                <label>Rating: </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  lang="en-US"
+                  min="0"
+                  max="10"
+                  pattern="[0-9]+([,\.][0-9]+)?"
+                  {...register('rating')}
+                />
+              </Box>
 
-      <Box>
-        <label>Time: </label>
-        <input
-          className="form-control"
-          type="text"
-          value={time || ''}
-          onChange={(e) => setTime(e.target.value)}
-        />
-      </Box>
+              <Box>
+                <label>Time: </label>
+                <input type="text" {...register('time')} />
+              </Box>
 
-      <button onClick={handleSubmit}>
-        {updateStatus ? 'Update' : 'Create Dream'}
-      </button>
+              <button type="submit">
+                {updateStatus ? 'Update' : 'Create Dream'}
+              </button>
 
-      <button onClick={handleBackToDreams}>Cancel</button>
-    </Box>
+              <button onClick={handleBackToDreams}>Cancel</button>
+            </form>
+          </Box>
+        </Box>
+      </Grid>
+    </Grid>
   );
 };
 
