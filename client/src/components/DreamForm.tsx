@@ -37,11 +37,10 @@ const DreamForm: FC<Props> = ({
   const handleBackToDreams = () => push('/dreams');
 
   const onSubmit: SubmitHandler<FormData> = async ({ name, rating, time }) => {
+    const dreamData = { name, rating: +rating, time };
     try {
       await mutation({
-        variables: updateStatus
-          ? { id, name, rating, time }
-          : { name, rating, time },
+        variables: updateStatus ? { id, ...dreamData } : dreamData,
       });
       handleBackToDreams();
     } catch (err) {
@@ -69,7 +68,7 @@ const DreamForm: FC<Props> = ({
                 <label>Rating: </label>
                 <input
                   type="number"
-                  step="0.1"
+                  step="1"
                   lang="en-US"
                   min="0"
                   max="10"

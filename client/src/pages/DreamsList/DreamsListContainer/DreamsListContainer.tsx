@@ -6,7 +6,9 @@ import DreamsList from './DreamsList';
 import { useDreamsQueryQuery } from './api.generated';
 
 const DreamsListContainer: FC = () => {
-  const { loading, data, error } = useDreamsQueryQuery();
+  const { loading, data, error } = useDreamsQueryQuery({
+    fetchPolicy: 'no-cache',
+  });
 
   if (error) console.log(error);
 
