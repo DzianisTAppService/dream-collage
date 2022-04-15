@@ -3,27 +3,18 @@ import { useHistory } from 'react-router-dom';
 import {
   Card,
   Grid,
-  makeStyles,
   CardMedia,
   CardHeader,
   Paper,
   Box,
   Typography,
   Button,
-} from '@material-ui/core';
-import { StarRate } from '@material-ui/icons';
+} from '@mui/material';
+import { StarRate } from '@mui/icons-material';
 
 import defaultPicture from '../../assets/images/flat.jpg';
 
 import { Dream as DreamType } from '../../__generated__/types';
-
-const useStyles = makeStyles({
-  media: {
-    width: '100%',
-    height: '200px',
-    borderRadius: '3px',
-  },
-});
 
 interface Props {
   data: DreamType;
@@ -32,7 +23,6 @@ interface Props {
 
 const Dream: FC<Props> = ({ data, data: { _id: id, image }, deleteDream }) => {
   const { push } = useHistory();
-  const classes = useStyles();
 
   return (
     <Grid item xs={6}>
@@ -50,11 +40,16 @@ const Dream: FC<Props> = ({ data, data: { _id: id, image }, deleteDream }) => {
           </Box>
 
           <Box px={2}>
-            <Box position="relative">
+            <Box
+              position="relative"
+              width="100%"
+              height="200px"
+              borderRadius="3px"
+            >
               <CardMedia
-                className={classes.media}
                 image={image || defaultPicture}
                 title={data.name}
+                style={{ height: '100%' }}
               />
               <Box
                 position="absolute"

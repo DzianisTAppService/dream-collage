@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 
-import { DreamCreate, DreamUpdate, DreamsListContainer } from './pages';
-import { NavBar } from './components';
+import { DreamCreate, DreamUpdate, DreamsListContainer } from '../pages';
+import { NavBar } from '../components';
 
 const App: FC = () => (
   <div className="App">

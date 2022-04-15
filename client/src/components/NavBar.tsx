@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, Grid, Link } from '@material-ui/core';
+import { Box, Grid, Link } from '@mui/material';
 
 const NavBar: FC = () => {
   const NavItems = [
