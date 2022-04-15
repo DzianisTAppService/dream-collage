@@ -4,6 +4,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { LoadingComponent } from '.';
+import PATHS from 'constants/routes-paths';
 
 import { Dream as DreamType } from '../__generated__/types';
 
@@ -34,7 +35,7 @@ const DreamForm: FC<Props> = ({
 
   const { register, handleSubmit } = useForm<FormData>({ defaultValues });
 
-  const handleBackToDreams = () => navigate('/dreams');
+  const handleBackToDreams = () => navigate(PATHS.dreams);
 
   const onSubmit: SubmitHandler<FormData> = async ({ name, rating, time }) => {
     const dreamData = { name, rating: +rating, time };

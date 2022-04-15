@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Grid } from '@mui/material';
 
-import { NavBar } from 'components';
+import { NavBar } from 'common';
 import Routes from './Routes';
 import { StyledAppContainer } from './App.styles';
 

@@ -2,15 +2,17 @@ import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
 
+import PATHS from 'constants/routes-paths';
+
 const NavBar: FC = () => {
   const NavItems = [
     {
       name: 'Dreams',
-      url: '/dreams',
+      url: PATHS.dreams,
     },
     {
       name: 'Create Dream',
-      url: '/dream/create',
+      url: PATHS.dreamCreate,
     },
   ];
 

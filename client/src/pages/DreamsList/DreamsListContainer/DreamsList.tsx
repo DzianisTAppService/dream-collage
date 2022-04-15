@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Grid, Typography } from '@mui/material';
 
-import DreamContainer from '../DreamContainer/DreamContainer';
+import DreamContainer from '../DreamContainer';
+import PATHS from 'constants/routes-paths';
 
 import { DreamsQueryQuery } from './api.generated';
 
@@ -27,7 +28,7 @@ const DreamList: FC<Props> = ({ data }) => (
         <Box display="flex" alignItems="center" alignSelf="start">
           <h3>You have no dreams yet, lets create the first:</h3>
           <Box ml={2}>
-            <RouterLink to="/dream/create" className="nav-link">
+            <RouterLink to={PATHS.dreamCreate} className="nav-link">
               Create Dream
             </RouterLink>
           </Box>

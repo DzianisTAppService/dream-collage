@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { Box } from '@mui/material';
 
-import { LoadingComponent } from '../../../components';
+import { LoadingComponent } from 'common';
 import DreamsList from './DreamsList';
+
 import { useDreamsQueryQuery } from './api.generated';
 
 const DreamsListContainer: FC = () => {

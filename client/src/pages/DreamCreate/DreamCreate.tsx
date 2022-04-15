@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DreamForm from '../../components/DreamForm';
+import DreamForm from '../../common/DreamForm';
 import { useCreateDreamMutation } from './api.generated';
 
 const DreamCreate: React.FC = () => {

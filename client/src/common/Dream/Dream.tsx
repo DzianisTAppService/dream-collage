@@ -15,6 +15,7 @@ import { StarRate } from '@mui/icons-material';
 import defaultPicture from '../../assets/images/flat.jpg';
 
 import { Dream as DreamType } from '../../__generated__/types';
+import PATHS from '../../constants/routes-paths';
 
 interface Props {
   data: DreamType;
@@ -72,7 +73,7 @@ const Dream: FC<Props> = ({ data, data: { _id: id, image }, deleteDream }) => {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => navigate(`/dream/update/${id}`)}
+              onClick={() => navigate(`${PATHS.dreamUpdate}/${id}`)}
             >
               Update
             </Button>

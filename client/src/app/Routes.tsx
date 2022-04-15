@@ -1,14 +1,19 @@
 import React, { FC } from 'react';
 import { Navigate, Route, Routes as ReactRouterRoutes } from 'react-router-dom';
-import { DreamCreate, DreamsListContainer, DreamUpdate } from '../pages';
+
+import { DreamCreate, DreamsListContainer, DreamUpdate } from 'pages';
+import PATHS from 'constants/routes-paths';
 
 const Routes: FC = () => (
   <ReactRouterRoutes>
-    <Route path="/dreams" element={<DreamsListContainer />} />
-    <Route path="/dream/create" element={<DreamCreate />} />
-    <Route path="/dream/update/:id" element={<DreamUpdate />} />
+    <Route path={PATHS.dreams} element={<DreamsListContainer />} />
+    <Route path={PATHS.dreamCreate} element={<DreamCreate />} />
+    <Route path={PATHS.dreamUpdate} element={<DreamUpdate />} />
 
-    <Route path="*" element={<Navigate to={'/dreams'} replace />} />
+    <Route
+      path={PATHS.noRoute}
+      element={<Navigate to={PATHS.dreams} replace />}
+    />
   </ReactRouterRoutes>
 );
 
