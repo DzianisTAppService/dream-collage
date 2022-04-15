@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Card,
   Grid,
@@ -22,7 +22,7 @@ interface Props {
 }
 
 const Dream: FC<Props> = ({ data, data: { _id: id, image }, deleteDream }) => {
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
   return (
     <Grid item xs={6}>
@@ -72,7 +72,7 @@ const Dream: FC<Props> = ({ data, data: { _id: id, image }, deleteDream }) => {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => push(`/dream/update/${id}`)}
+              onClick={() => navigate(`/dream/update/${id}`)}
             >
               Update
             </Button>

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Box, Grid, Typography } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
@@ -24,7 +24,7 @@ const DreamForm: FC<Props> = ({
   mutation: [mutation, { loading }],
   updateStatus = false,
 }) => {
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
   const defaultValues = {
     name: name,
@@ -34,7 +34,7 @@ const DreamForm: FC<Props> = ({
 
   const { register, handleSubmit } = useForm<FormData>({ defaultValues });
 
-  const handleBackToDreams = () => push('/dreams');
+  const handleBackToDreams = () => navigate('/dreams');
 
   const onSubmit: SubmitHandler<FormData> = async ({ name, rating, time }) => {
     const dreamData = { name, rating: +rating, time };

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, Grid, Link, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 
 import DreamContainer from '../DreamContainer/DreamContainer';
 
@@ -27,11 +27,7 @@ const DreamList: FC<Props> = ({ data }) => (
         <Box display="flex" alignItems="center" alignSelf="start">
           <h3>You have no dreams yet, lets create the first:</h3>
           <Box ml={2}>
-            <RouterLink
-              component={Link}
-              to="/dream/create"
-              className="nav-link"
-            >
+            <RouterLink to="/dream/create" className="nav-link">
               Create Dream
             </RouterLink>
           </Box>

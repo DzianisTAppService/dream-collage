@@ -1,24 +1,17 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import { CssBaseline } from '@mui/material';
+import React, { lazy, Suspense } from 'react';
+import { CircularProgress } from '@mui/material';
 
-import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
-  cache: new InMemoryCache(),
-});
+const AppProvider = lazy(() => import('./app/AppProvider'));
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <CssBaseline />
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ApolloProvider>,
+  <React.StrictMode>
+    <Suspense fallback={<CircularProgress />}>
+      <AppProvider />
+    </Suspense>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

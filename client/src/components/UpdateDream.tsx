@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 interface Props {
@@ -7,12 +7,12 @@ interface Props {
 }
 
 const UpdateDream: FC<Props> = (props) => {
-  const { push } = useHistory();
+  const navigate = useNavigate();
   return (
     <Button
       variant="contained"
       color="primary"
-      onClick={() => push(`/dream/update/${props.id}`)}
+      onClick={() => navigate(`/dream/update/${props.id}`)}
     >
       Update
     </Button>

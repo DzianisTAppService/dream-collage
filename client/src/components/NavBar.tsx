@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, Grid, Link } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
 const NavBar: FC = () => {
   const NavItems = [
@@ -26,9 +26,7 @@ const NavBar: FC = () => {
         {NavItems.map(({ name, url }) => (
           <Grid item key={name}>
             <Box mr={2}>
-              <RouterLink component={Link} to={url}>
-                {name}
-              </RouterLink>
+              <RouterLink to={url}>{name}</RouterLink>
             </Box>
           </Grid>
         ))}
