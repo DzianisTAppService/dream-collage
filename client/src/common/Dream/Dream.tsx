@@ -12,10 +12,10 @@ import {
 } from '@mui/material';
 import { StarRate } from '@mui/icons-material';
 
-import defaultPicture from '../../assets/images/flat.jpg';
+import defaultPicture from 'assets/images/flat.jpg';
+import PATHS from 'constants/routes-paths';
 
-import { Dream as DreamType } from '../../__generated__/types';
-import PATHS from '../../constants/routes-paths';
+import { Dream as DreamType } from '__generated__/types';
 
 interface Props {
   data: DreamType;

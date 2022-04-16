@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
-import DreamForm from '../../common/DreamForm';
+import DreamForm from '../../common/DreamForm/DreamForm';
 import { LoadingComponent } from '../../common';
 
 import { useGetDreamQuery, useUpdateDreamMutation } from './api.generated';
