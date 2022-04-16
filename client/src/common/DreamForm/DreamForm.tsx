@@ -1,12 +1,15 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Divider, Grid, Typography } from '@mui/material';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 
 import LoadingComponent from 'common/LoadingComponent';
+import NameField from './NameField';
 import PATHS from 'constants/routes-paths';
 
 import { Dream as DreamType } from '__generated__/types';
+import RatingField from './RatingField';
+import TimeField from './TimeField';
 
 interface Props {
   dreamData?: DreamType;
@@ -26,15 +29,15 @@ const DreamForm: FC<Props> = ({
   updateStatus = false,
 }) => {
   const navigate = useNavigate();
-  const methods = useForm();
 
   const defaultValues = {
-    name: name,
+    name: name || '',
     rating: rating || 0,
     time: time || '',
   };
 
-  const { register, handleSubmit } = useForm<FormData>({ defaultValues });
+  const methods = useForm<FormData>({ defaultValues });
+  const { register, handleSubmit } = methods;
 
   const handleBackToDreams = () => navigate(PATHS.dreams);
 
@@ -55,6 +58,7 @@ const DreamForm: FC<Props> = ({
       <Grid item xs={12}>
         <Box mx={4} p={5}>
           {loading && <LoadingComponent />}
+
           <Typography variant="h4" align="center">
             Create Dream
           </Typography>
@@ -62,34 +66,31 @@ const DreamForm: FC<Props> = ({
           <Box mt={4}>
             <FormProvider {...methods}>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <Box>
-                  <label>Name: </label>
-                  <input type="text" {...register('name')} />
+                <Box width={500} p={3} border="1px solid grey" borderRadius={5}>
+                  <Grid container direction="column">
+                    <Grid item>
+                      <NameField />
+                    </Grid>
+
+                    <Grid item>
+                      <RatingField />
+                    </Grid>
+
+                    <Grid item>
+                      <TimeField />
+                    </Grid>
+
+                    <Box my={3}>
+                      <Divider />
+                    </Box>
+
+                    <button type="submit">
+                      {updateStatus ? 'Update' : 'Create Dream'}
+                    </button>
+
+                    <button onClick={handleBackToDreams}>Cancel</button>
+                  </Grid>
                 </Box>
-
-                <Box>
-                  <label>Rating: </label>
-                  <input
-                    type="number"
-                    step="1"
-                    lang="en-US"
-                    min="0"
-                    max="10"
-                    pattern="[0-9]+([,\.][0-9]+)?"
-                    {...register('rating')}
-                  />
-                </Box>
-
-                <Box>
-                  <label>Time: </label>
-                  <input type="text" {...register('time')} />
-                </Box>
-
-                <button type="submit">
-                  {updateStatus ? 'Update' : 'Create Dream'}
-                </button>
-
-                <button onClick={handleBackToDreams}>Cancel</button>
               </form>
             </FormProvider>
           </Box>
