@@ -8,7 +8,7 @@ const Routes: FC = () => (
   <ReactRouterRoutes>
     <Route path={PATHS.dreams} element={<DreamsListContainer />} />
     <Route path={PATHS.dreamCreate} element={<DreamCreate />} />
-    <Route path={PATHS.dreamUpdate} element={<DreamUpdate />} />
+    <Route path={`${PATHS.dreamUpdate}/:id`} element={<DreamUpdate />} />
 
     <Route
       path={PATHS.noRoute}
