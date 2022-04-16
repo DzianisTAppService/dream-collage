@@ -17,15 +17,25 @@ export interface NavBarProps {
 }
 
 const NavBar: FC<NavBarProps> = ({ links }) => (
-  <AppBarStyled position='relative' color='primary' elevation={0}>
+  <AppBarStyled position="relative" color="primary" elevation={0}>
     <Toolbar>
-      <Grid container direction='row' alignItems='center' justifyContent='space-between'>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+      >
         {/* Logo */}
-        <Grid item xs='auto'>
-          <LogoLink to={PATHS.welcome} style={{ textDecoration: 'none' }}>
-            <Grid container item justifyContent='flex-start' alignItems='center'>
+        <Grid item xs="auto">
+          <LogoLink to={PATHS.dreams} style={{ textDecoration: 'none' }}>
+            <Grid
+              container
+              item
+              justifyContent="flex-start"
+              alignItems="center"
+            >
               <AppBarLogo>
-                <Typography color='inherit'>Test App</Typography>
+                <Typography color="inherit">Dreams</Typography>
               </AppBarLogo>
             </Grid>
           </LogoLink>
@@ -34,9 +44,14 @@ const NavBar: FC<NavBarProps> = ({ links }) => (
         {links && (
           <Grid item xs>
             <Box ml={5}>
-              <Grid container direction='row' justifyContent='flex-start' alignItems='center'>
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+              >
                 {links.map((link: NavBarLink) => (
-                  <Grid item sm='auto' key={JSON.stringify(link)}>
+                  <Grid item sm="auto" key={JSON.stringify(link)}>
                     <Box mr={5}>
                       <NavLink
                         to={link.linkTo}
@@ -44,8 +59,13 @@ const NavBar: FC<NavBarProps> = ({ links }) => (
                           color: isActive ? '#fff' : '#545e6f',
                           fontWeight: isActive ? 'bold' : 'normal',
                           textDecoration: 'none',
-                        })}>
-                        <Typography variant='h6' component='span' color='inherit'>
+                        })}
+                      >
+                        <Typography
+                          variant="h6"
+                          component="span"
+                          color="inherit"
+                        >
                           {link.text}
                         </Typography>
                       </NavLink>

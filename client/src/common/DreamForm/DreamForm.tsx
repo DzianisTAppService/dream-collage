@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Grid, Typography } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { LoadingComponent } from '..';
+import LoadingComponent from 'common/LoadingComponent';
 import PATHS from 'constants/routes-paths';
 
-import { Dream as DreamType } from '../../__generated__/types';
+import { Dream as DreamType } from '__generated__/types';
 
 interface Props {
   dreamData?: DreamType;

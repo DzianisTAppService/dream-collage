@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
-
-import { Dream as DreamType } from '../../../__generated__/types';
-import { useDeleteDreamMutation } from './api.generated';
-import { Dream, LoadingComponent } from '../../../common';
 import { Typography } from '@mui/material';
+
+import Dream from 'common/Dream';
+import LoadingComponent from 'common/LoadingComponent';
+
+import { useDeleteDreamMutation } from './api.generated';
+import { Dream as DreamType } from '__generated__/types';
 
 interface Props {
   dream: DreamType;
