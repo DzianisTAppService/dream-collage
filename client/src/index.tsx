@@ -1,14 +1,14 @@
 import ReactDOM from 'react-dom';
 import React, { lazy, Suspense } from 'react';
-import { CircularProgress } from '@mui/material';
 
 import reportWebVitals from './reportWebVitals';
+import LoadingComponent from './common/LoadingComponent';
 
 const AppProvider = lazy(() => import('./app/AppProvider'));
 
 ReactDOM.render(
   <React.StrictMode>
-    <Suspense fallback={<CircularProgress />}>
+    <Suspense fallback={<LoadingComponent />}>
       <AppProvider />
     </Suspense>
   </React.StrictMode>,

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Grid, Typography } from '@mui/material';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 
 import LoadingComponent from 'common/LoadingComponent';
 import PATHS from 'constants/routes-paths';
@@ -26,6 +26,7 @@ const DreamForm: FC<Props> = ({
   updateStatus = false,
 }) => {
   const navigate = useNavigate();
+  const methods = useForm();
 
   const defaultValues = {
     name: name,
@@ -59,36 +60,38 @@ const DreamForm: FC<Props> = ({
           </Typography>
 
           <Box mt={4}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Box>
-                <label>Name: </label>
-                <input type="text" {...register('name')} />
-              </Box>
+            <FormProvider {...methods}>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <Box>
+                  <label>Name: </label>
+                  <input type="text" {...register('name')} />
+                </Box>
 
-              <Box>
-                <label>Rating: </label>
-                <input
-                  type="number"
-                  step="1"
-                  lang="en-US"
-                  min="0"
-                  max="10"
-                  pattern="[0-9]+([,\.][0-9]+)?"
-                  {...register('rating')}
-                />
-              </Box>
+                <Box>
+                  <label>Rating: </label>
+                  <input
+                    type="number"
+                    step="1"
+                    lang="en-US"
+                    min="0"
+                    max="10"
+                    pattern="[0-9]+([,\.][0-9]+)?"
+                    {...register('rating')}
+                  />
+                </Box>
 
-              <Box>
-                <label>Time: </label>
-                <input type="text" {...register('time')} />
-              </Box>
+                <Box>
+                  <label>Time: </label>
+                  <input type="text" {...register('time')} />
+                </Box>
 
-              <button type="submit">
-                {updateStatus ? 'Update' : 'Create Dream'}
-              </button>
+                <button type="submit">
+                  {updateStatus ? 'Update' : 'Create Dream'}
+                </button>
 
-              <button onClick={handleBackToDreams}>Cancel</button>
-            </form>
+                <button onClick={handleBackToDreams}>Cancel</button>
+              </form>
+            </FormProvider>
           </Box>
         </Box>
       </Grid>
