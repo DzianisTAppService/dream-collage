@@ -1,26 +1,22 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Divider, Grid, Typography } from '@mui/material';
-import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 
 import LoadingComponent from 'common/LoadingComponent';
 import NameField from './NameField';
 import PATHS from 'constants/routes-paths';
-
-import { Dream as DreamType } from '__generated__/types';
 import RatingField from './RatingField';
 import TimeField from './TimeField';
+
+import { StyledButton } from './DreamForm.styles';
+
+import { Dream as DreamType } from '__generated__/types';
 
 interface Props {
   dreamData?: DreamType;
   mutation: any;
   updateStatus?: boolean;
-}
-
-interface FormData {
-  name: string;
-  rating: number;
-  time: string;
 }
 
 const DreamForm: FC<Props> = ({
@@ -32,16 +28,24 @@ const DreamForm: FC<Props> = ({
 
   const defaultValues = {
     name: name || '',
-    rating: rating || 0,
+    rating: rating || '',
     time: time || '',
   };
 
-  const methods = useForm<FormData>({ defaultValues });
-  const { register, handleSubmit } = methods;
+  const methods = useForm({ defaultValues });
+  const { handleSubmit } = methods;
 
   const handleBackToDreams = () => navigate(PATHS.dreams);
 
-  const onSubmit: SubmitHandler<FormData> = async ({ name, rating, time }) => {
+  const onSubmit = async ({
+    name,
+    rating,
+    time,
+  }: {
+    name: string;
+    rating: string | number;
+    time: string;
+  }) => {
     const dreamData = { name, rating: +rating, time };
     try {
       await mutation({
@@ -63,7 +67,7 @@ const DreamForm: FC<Props> = ({
             Create Dream
           </Typography>
 
-          <Box mt={4}>
+          <Box mt={4} display="flex" justifyContent="center">
             <FormProvider {...methods}>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Box width={500} p={3} border="1px solid grey" borderRadius={5}>
@@ -73,22 +77,38 @@ const DreamForm: FC<Props> = ({
                     </Grid>
 
                     <Grid item>
-                      <RatingField />
+                      <Box mt={2}>
+                        <RatingField />
+                      </Box>
                     </Grid>
 
                     <Grid item>
-                      <TimeField />
+                      <Box mt={2}>
+                        <TimeField />
+                      </Box>
                     </Grid>
 
                     <Box my={3}>
                       <Divider />
                     </Box>
 
-                    <button type="submit">
-                      {updateStatus ? 'Update' : 'Create Dream'}
-                    </button>
+                    <Grid item container justifyContent="space-between">
+                      <Box mr={2}>
+                        <StyledButton
+                          onClick={handleSubmit(onSubmit)}
+                          variant="contained"
+                        >
+                          {updateStatus ? 'Update' : 'Create Dream'}
+                        </StyledButton>
+                      </Box>
 
-                    <button onClick={handleBackToDreams}>Cancel</button>
+                      <StyledButton
+                        onClick={handleBackToDreams}
+                        variant="outlined"
+                      >
+                        Cancel
+                      </StyledButton>
+                    </Grid>
                   </Grid>
                 </Box>
               </form>
