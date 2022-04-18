@@ -1,7 +1,13 @@
 const graphql = require("graphql");
 const { DreamType, DeleteDreamType } = require("./types");
 const mongoose = require("mongoose");
-const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLInt } = graphql;
+const {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLNonNull,
+} = graphql;
 require("../models");
 
 const DreamInstance = mongoose.model("dream");
@@ -12,9 +18,9 @@ const mutations = new GraphQLObjectType({
     createDream: {
       type: DreamType,
       args: {
-        name: { type: GraphQLString },
-        time: { type: GraphQLString },
-        rating: { type: GraphQLInt },
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        time: { type: GraphQLString, nullable: true },
+        rating: { type: GraphQLInt, nullable: true },
       },
       resolve(parent, args) {
         return new DreamInstance(args).save();
@@ -23,10 +29,10 @@ const mutations = new GraphQLObjectType({
     updateDream: {
       type: DreamType,
       args: {
-        _id: { type: GraphQLID },
-        name: { type: GraphQLString },
-        time: { type: GraphQLString },
-        rating: { type: GraphQLInt },
+        _id: { type: new GraphQLNonNull(GraphQLID) },
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        time: { type: GraphQLString, nullable: true },
+        rating: { type: GraphQLInt, nullable: true },
       },
       resolve(parent, args) {
         return DreamInstance.findByIdAndUpdate(args._id, args);

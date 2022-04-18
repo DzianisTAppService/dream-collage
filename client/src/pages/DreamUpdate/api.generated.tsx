@@ -23,7 +23,7 @@ export type GetDreamQuery = {
 
 export type UpdateDreamMutationVariables = Types.Exact<{
   id: Types.Scalars['ID'];
-  name?: Types.Maybe<Types.Scalars['String']>;
+  name: Types.Scalars['String'];
   time?: Types.Maybe<Types.Scalars['String']>;
   rating?: Types.Maybe<Types.Scalars['Int']>;
 }>;
@@ -99,7 +99,7 @@ export type GetDreamQueryResult = Apollo.QueryResult<
   GetDreamQueryVariables
 >;
 export const UpdateDreamDocument = gql`
-  mutation UpdateDream($id: ID!, $name: String, $time: String, $rating: Int) {
+  mutation UpdateDream($id: ID!, $name: String!, $time: String, $rating: Int) {
     updateDream(_id: $id, name: $name, time: $time, rating: $rating) {
       _id
       name

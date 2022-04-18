@@ -18,9 +18,7 @@ const DateField: FC = () => {
           <DatePicker
             label="Date"
             value={value}
-            onChange={(newValue) => {
-              onChange(newValue);
-            }}
+            onChange={onChange}
             renderInput={(params) => (
               <TextField {...params} error={Boolean(errors.time?.message)} />
             )}

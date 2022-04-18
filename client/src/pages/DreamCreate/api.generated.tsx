@@ -4,7 +4,7 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {};
 export type CreateDreamMutationVariables = Types.Exact<{
-  name?: Types.Maybe<Types.Scalars['String']>;
+  name: Types.Scalars['String'];
   time?: Types.Maybe<Types.Scalars['String']>;
   rating?: Types.Maybe<Types.Scalars['Int']>;
 }>;
@@ -24,7 +24,7 @@ export type CreateDreamMutation = {
 };
 
 export const CreateDreamDocument = gql`
-  mutation CreateDream($name: String, $time: String, $rating: Int) {
+  mutation CreateDream($name: String!, $time: String, $rating: Int) {
     createDream(name: $name, time: $time, rating: $rating) {
       _id
       name

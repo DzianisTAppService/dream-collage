@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { Schema } from 'yup';
 
-const useValidationResolver = (validationSchema: Schema<{}>): any => {
+const useValidationResolver = (validationSchema: Schema<any>): any => {
   return useCallback(
     async (data: Record<any, any>, context?: Record<string, any>) => {
       try {

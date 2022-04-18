@@ -15,19 +15,28 @@ import { StyledButton } from './DreamForm.styles';
 
 import { Dream as DreamType } from '__generated__/types';
 
-interface Props {
+interface DreamFormProps {
   dreamData?: DreamType;
   mutation: any;
   updateStatus?: boolean;
 }
 
+type FormData = Omit<DreamType, '_id'>;
+
 const schema = yup.object().shape({
   name: yup.string().required('Name is required'),
-  rating: yup.number().required('Name is required').positive().integer(),
-  time: yup.date().required('Name is required'),
-}) as yup.Schema<{}>;
+  rating: yup
+    .number()
+    .positive()
+    .integer()
+    .nullable()
+    .transform((value: string, originalValue: string) =>
+      originalValue.trim() === '' ? null : value
+    ),
+  time: yup.date().min(new Date(), 'Please choose future date').nullable(),
+});
 
-const DreamForm: FC<Props> = ({
+const DreamForm: FC<DreamFormProps> = ({
   dreamData: { name, rating, time, _id: id } = {},
   mutation: [mutation, { loading }],
   updateStatus = false,
@@ -35,30 +44,25 @@ const DreamForm: FC<Props> = ({
   const navigate = useNavigate();
 
   const defaultValues = {
-    name: name || '',
-    rating: rating || '',
-    time: time || null,
+    name: name,
+    rating: rating,
+    time: time,
   };
 
   const resolver = useYupValidationResolver(schema);
-  const methods = useForm({ defaultValues, resolver });
+  const methods = useForm<FormData>({
+    defaultValues,
+    resolver,
+    ...(updateStatus ? defaultValues : {}),
+  });
   const { handleSubmit } = methods;
 
   const handleBackToDreams = () => navigate(PATHS.dreams);
 
-  const onSubmit = async ({
-    name,
-    rating,
-    time,
-  }: {
-    name: string;
-    rating: string | number;
-    time: string | null;
-  }) => {
-    const dreamData = { name, rating: +rating, time };
+  const onSubmit = async (data: FormData): Promise<void> => {
     try {
       await mutation({
-        variables: updateStatus ? { id, ...dreamData } : dreamData,
+        variables: updateStatus ? { id, ...data } : data,
       });
       handleBackToDreams();
     } catch (err) {
@@ -73,7 +77,7 @@ const DreamForm: FC<Props> = ({
           {loading && <LoadingComponent />}
 
           <Typography variant="h4" align="center">
-            Create Dream
+            {updateStatus ? 'Update Dream' : 'Create Dream'}
           </Typography>
 
           <Box mt={4} display="flex" justifyContent="center">

@@ -43,7 +43,7 @@ export type RootMutationType = {
 };
 
 export type RootMutationTypecreateDreamArgs = {
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   rating?: Maybe<Scalars['Int']>;
   time?: Maybe<Scalars['String']>;
 };
@@ -53,8 +53,8 @@ export type RootMutationTypedeleteDreamArgs = {
 };
 
 export type RootMutationTypeupdateDreamArgs = {
-  _id?: Maybe<Scalars['ID']>;
-  name?: Maybe<Scalars['String']>;
+  _id: Scalars['ID'];
+  name: Scalars['String'];
   rating?: Maybe<Scalars['Int']>;
   time?: Maybe<Scalars['String']>;
 };
@@ -230,7 +230,7 @@ export type RootMutationTypeResolvers<
     Maybe<ResolversTypes['Dream']>,
     ParentType,
     ContextType,
-    RequireFields<RootMutationTypecreateDreamArgs, never>
+    RequireFields<RootMutationTypecreateDreamArgs, 'name'>
   >;
   deleteDream?: Resolver<
     Maybe<ResolversTypes['DeleteDream']>,
@@ -242,7 +242,7 @@ export type RootMutationTypeResolvers<
     Maybe<ResolversTypes['Dream']>,
     ParentType,
     ContextType,
-    RequireFields<RootMutationTypeupdateDreamArgs, never>
+    RequireFields<RootMutationTypeupdateDreamArgs, '_id' | 'name'>
   >;
 };
 

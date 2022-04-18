@@ -7,7 +7,7 @@ query GetDream($id: ID) {
 	}
 }
 
-mutation UpdateDream($id: ID!, $name: String, $time: String, $rating: Int) {
+mutation UpdateDream($id: ID!, $name: String!, $time: String, $rating: Int) {
 	updateDream(_id: $id, name: $name, time: $time, rating: $rating) {
 		_id
 		name
