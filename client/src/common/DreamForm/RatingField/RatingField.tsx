@@ -1,9 +1,12 @@
 import React, { FC } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { FormControl, TextField } from '@mui/material';
+import { FormControl, FormHelperText, TextField } from '@mui/material';
 
 const RatingField: FC = () => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <Controller
@@ -24,7 +27,9 @@ const RatingField: FC = () => {
             }}
             value={value}
             onChange={onChange}
+            error={Boolean(errors.rating?.message)}
           />
+          <FormHelperText error>{errors.rating?.message}</FormHelperText>
         </FormControl>
       )}
     />

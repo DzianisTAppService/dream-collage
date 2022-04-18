@@ -16,6 +16,7 @@ const useValidationResolver = (validationSchema: Schema<{}>): any => {
       } catch (errors) {
         return {
           values: {},
+          // @ts-ignore
           errors: errors?.inner?.reduce(
             (allErrors: Record<any, any>, currentError: Record<any, any>) => ({
               ...allErrors,

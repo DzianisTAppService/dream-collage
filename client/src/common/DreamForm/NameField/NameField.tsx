@@ -1,9 +1,12 @@
 import React, { FC } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { FormControl, TextField } from '@mui/material';
+import { FormControl, FormHelperText, TextField } from '@mui/material';
 
 const NameField: FC = () => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <Controller
@@ -17,7 +20,9 @@ const NameField: FC = () => {
             label="Dream name"
             value={value}
             onChange={onChange}
+            error={Boolean(errors.name?.message)}
           />
+          <FormHelperText error>{errors.name?.message}</FormHelperText>
         </FormControl>
       )}
     />

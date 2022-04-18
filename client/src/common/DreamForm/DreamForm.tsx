@@ -22,10 +22,10 @@ interface Props {
 }
 
 const schema = yup.object().shape({
-  name: yup.string().required(),
-  rating: yup.number().required().positive().integer(),
-  time: yup.string().required(),
-});
+  name: yup.string().required('Name is required'),
+  rating: yup.number().required('Name is required').positive().integer(),
+  time: yup.date().required('Name is required'),
+}) as yup.Schema<{}>;
 
 const DreamForm: FC<Props> = ({
   dreamData: { name, rating, time, _id: id } = {},
@@ -37,7 +37,7 @@ const DreamForm: FC<Props> = ({
   const defaultValues = {
     name: name || '',
     rating: rating || '',
-    time: time || '',
+    time: time || null,
   };
 
   const resolver = useYupValidationResolver(schema);
@@ -53,7 +53,7 @@ const DreamForm: FC<Props> = ({
   }: {
     name: string;
     rating: string | number;
-    time: string;
+    time: string | null;
   }) => {
     const dreamData = { name, rating: +rating, time };
     try {

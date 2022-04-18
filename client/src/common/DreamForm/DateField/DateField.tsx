@@ -1,10 +1,13 @@
 import React, { FC } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { FormControl, TextField } from '@mui/material';
+import { FormControl, FormHelperText, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const DateField: FC = () => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <Controller
@@ -18,8 +21,11 @@ const DateField: FC = () => {
             onChange={(newValue) => {
               onChange(newValue);
             }}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => (
+              <TextField {...params} error={Boolean(errors.time?.message)} />
+            )}
           />
+          <FormHelperText error>{errors.time?.message}</FormHelperText>
         </FormControl>
       )}
     />
