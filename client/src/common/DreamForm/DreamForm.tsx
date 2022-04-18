@@ -7,7 +7,7 @@ import LoadingComponent from 'common/LoadingComponent';
 import NameField from './NameField';
 import PATHS from 'constants/routes-paths';
 import RatingField from './RatingField';
-import TimeField from './TimeField';
+import DateField from './DateField';
 
 import { StyledButton } from './DreamForm.styles';
 
@@ -77,14 +77,14 @@ const DreamForm: FC<Props> = ({
                     </Grid>
 
                     <Grid item>
-                      <Box mt={2}>
+                      <Box mt={3}>
                         <RatingField />
                       </Box>
                     </Grid>
 
                     <Grid item>
-                      <Box mt={2}>
-                        <TimeField />
+                      <Box mt={3}>
+                        <DateField />
                       </Box>
                     </Grid>
 

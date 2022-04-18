@@ -35,7 +35,7 @@ const NavBar: FC<NavBarProps> = ({ links }) => (
               alignItems="center"
             >
               <AppBarLogo>
-                <Typography color="inherit">Dreams</Typography>
+                <Typography color="inherit">Dreams collage</Typography>
               </AppBarLogo>
             </Grid>
           </LogoLink>

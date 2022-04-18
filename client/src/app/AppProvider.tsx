@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import App from './App';
 import GlobalStyle from 'common/GlobalStyle';
@@ -14,9 +16,11 @@ const AppProvider: FC = () => (
   <ApolloProvider client={client}>
     <GlobalStyle />
 
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </LocalizationProvider>
   </ApolloProvider>
 );
 
