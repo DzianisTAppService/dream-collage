@@ -1,13 +1,15 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Divider, Grid, Typography } from '@mui/material';
 import { useForm, FormProvider } from 'react-hook-form';
+import { Box, Divider, Grid, Typography } from '@mui/material';
+import * as yup from 'yup';
 
 import LoadingComponent from 'common/LoadingComponent';
 import NameField from './NameField';
 import PATHS from 'constants/routes-paths';
 import RatingField from './RatingField';
 import DateField from './DateField';
+import { useYupValidationResolver } from 'utils/hooks';
 
 import { StyledButton } from './DreamForm.styles';
 
@@ -18,6 +20,12 @@ interface Props {
   mutation: any;
   updateStatus?: boolean;
 }
+
+const schema = yup.object().shape({
+  name: yup.string().required(),
+  rating: yup.number().required().positive().integer(),
+  time: yup.string().required(),
+});
 
 const DreamForm: FC<Props> = ({
   dreamData: { name, rating, time, _id: id } = {},
@@ -32,7 +40,8 @@ const DreamForm: FC<Props> = ({
     time: time || '',
   };
 
-  const methods = useForm({ defaultValues });
+  const resolver = useYupValidationResolver(schema);
+  const methods = useForm({ defaultValues, resolver });
   const { handleSubmit } = methods;
 
   const handleBackToDreams = () => navigate(PATHS.dreams);
