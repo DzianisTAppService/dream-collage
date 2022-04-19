@@ -18,13 +18,17 @@ interface StarsBlockProps {
 }
 
 const StarsBlock: FC<StarsBlockProps> = ({ updateRating }) => {
+  const [hoveredItem, setHoveredItem] = useState<number>(0);
+
   return (
     <Box>
       {Array.from(new Array(10)).map((_, i) => (
         <StyledStarRate
           key={i}
-          fontSize="small"
+          fontSize="medium"
           onClick={() => updateRating(++i)}
+          onMouseOver={() => setHoveredItem(i)}
+          style={i <= hoveredItem ? { color: 'gold' } : {}}
         />
       ))}
     </Box>
