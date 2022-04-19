@@ -9,6 +9,7 @@ import NameField from './NameField';
 import PATHS from 'constants/routes-paths';
 import RatingField from './RatingField';
 import DateField from './DateField';
+import UploadField from './UploadField';
 import { useYupValidationResolver } from 'utils/hooks';
 
 import { StyledButton } from './DreamForm.styles';
@@ -101,6 +102,12 @@ const DreamForm: FC<DreamFormProps> = ({
                     <Grid item>
                       <Box mt={3}>
                         <DateField />
+                      </Box>
+                    </Grid>
+
+                    <Grid item>
+                      <Box mt={3}>
+                        <UploadField />
                       </Box>
                     </Grid>
 
