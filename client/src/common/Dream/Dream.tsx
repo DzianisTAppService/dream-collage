@@ -80,7 +80,7 @@ const Dream: FC<Props> = ({
               <Rating
                 rating={data.rating}
                 id={id}
-                updateDream={handleRatingUpdate}
+                updateRating={handleRatingUpdate}
               />
             </Box>
           </Box>
