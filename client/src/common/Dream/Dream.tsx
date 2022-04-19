@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 import {
   Card,
   Grid,
@@ -10,20 +11,31 @@ import {
   Typography,
   Button,
 } from '@mui/material';
-import { StarRate } from '@mui/icons-material';
 
 import defaultPicture from 'assets/images/flat.jpg';
 import PATHS from 'constants/routes-paths';
+import Rating from 'common/Rating';
 
 import { Dream as DreamType } from '__generated__/types';
 
 interface Props {
   data: DreamType;
   deleteDream: () => void;
+  updateDream: (data: Omit<DreamType, '_id'>) => Promise<void>;
 }
 
-const Dream: FC<Props> = ({ data, data: { _id: id, image }, deleteDream }) => {
+const Dream: FC<Props> = ({
+  data,
+  data: { _id: id, image },
+  deleteDream,
+  updateDream,
+}) => {
   const navigate = useNavigate();
+
+  const handleDreamUpdate = () => navigate(`${PATHS.dreamUpdate}/${id}`);
+  const handleRatingUpdate = async (rating: number) => {
+    await updateDream({ name: data.name, rating });
+  };
 
   return (
     <Grid item xs={6}>
@@ -35,8 +47,21 @@ const Dream: FC<Props> = ({ data, data: { _id: id, image }, deleteDream }) => {
             alignItems="center"
           >
             <CardHeader title={data.name} />
-            <Box pr={2}>
-              <Typography>{data.time}</Typography>
+            <Box pr={2} color={data.time ? 'inherit' : '#a8a8a8'}>
+              {data.time ? (
+                <Typography>
+                  {moment(data.time).format('MM-DD-YYYY')}
+                </Typography>
+              ) : (
+                <Button
+                  onClick={handleDreamUpdate}
+                  color="inherit"
+                  variant="outlined"
+                  size="small"
+                >
+                  Add date
+                </Button>
+              )}
             </Box>
           </Box>
 
@@ -52,28 +77,18 @@ const Dream: FC<Props> = ({ data, data: { _id: id, image }, deleteDream }) => {
                 title={data.name}
                 style={{ height: '100%' }}
               />
-              <Box
-                position="absolute"
-                top={5}
-                right={5}
-                display="flex"
-                alignItems="center"
-                py={0.25}
-                px={0.6}
-                bgcolor={'rgba(255, 255, 255, 0.5)'}
-                borderRadius="3px"
-                color="#af9723"
-              >
-                <Typography variant="h5">{data.rating}</Typography>
-                <StarRate fontSize="large" />
-              </Box>
+              <Rating
+                rating={data.rating}
+                id={id}
+                updateDream={handleRatingUpdate}
+              />
             </Box>
           </Box>
           <Box pt={2} pr={2} pb={2} display="flex" justifyContent="flex-end">
             <Button
               variant="contained"
               color="primary"
-              onClick={() => navigate(`${PATHS.dreamUpdate}/${id}`)}
+              onClick={handleDreamUpdate}
             >
               Update
             </Button>

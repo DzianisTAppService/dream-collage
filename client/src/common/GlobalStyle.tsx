@@ -7,14 +7,17 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     border: 0;
   }
+
   body {
     margin: 0;
-    color: #545e6f;
+    color: #a8a8a8;
   }
+
   html, body, #root {
     height: 100%;
     width: 100%;
   }
+
   * {
     box-sizing: border-box;
   }

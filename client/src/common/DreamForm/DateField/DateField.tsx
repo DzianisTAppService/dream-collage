@@ -6,7 +6,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 const DateField: FC = () => {
   const {
     control,
-    formState: { errors },
+    formState: { errors = {} },
   } = useFormContext();
 
   return (

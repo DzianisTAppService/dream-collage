@@ -30,9 +30,12 @@ const schema = yup.object().shape({
     .positive()
     .integer()
     .nullable()
-    .transform((value: string, originalValue: string) =>
-      originalValue.trim() === '' ? null : value
-    ),
+    .transform((value: string, originalValue: string | number) => {
+      if (typeof originalValue === 'string')
+        return originalValue.trim() === '' ? null : value;
+
+      return value;
+    }),
   time: yup.date().min(new Date(), 'Please choose future date').nullable(),
 });
 

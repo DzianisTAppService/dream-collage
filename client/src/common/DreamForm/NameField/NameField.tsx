@@ -5,7 +5,7 @@ import { FormControl, FormHelperText, TextField } from '@mui/material';
 const NameField: FC = () => {
   const {
     control,
-    formState: { errors },
+    formState: { errors = {} },
   } = useFormContext();
 
   return (
