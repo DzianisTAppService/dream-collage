@@ -1,5 +1,5 @@
 const graphql = require("graphql");
-const { DreamType, DeleteDreamType } = require("./types");
+const { DreamType, DeleteDreamType, DreamImageInputType } = require("./types");
 const mongoose = require("mongoose");
 const {
   GraphQLObjectType,
@@ -21,8 +21,10 @@ const mutations = new GraphQLObjectType({
         name: { type: new GraphQLNonNull(GraphQLString) },
         time: { type: GraphQLString, nullable: true },
         rating: { type: GraphQLInt, nullable: true },
+        image: { type: DreamImageInputType, nullable: true },
       },
       resolve(parent, args) {
+        console.log(args, "telicinda_log");
         return new DreamInstance(args).save();
       },
     },
@@ -33,6 +35,7 @@ const mutations = new GraphQLObjectType({
         name: { type: new GraphQLNonNull(GraphQLString) },
         time: { type: GraphQLString, nullable: true },
         rating: { type: GraphQLInt, nullable: true },
+        image: { type: DreamImageInputType, nullable: true },
       },
       resolve(parent, args) {
         return DreamInstance.findByIdAndUpdate(args._id, args);

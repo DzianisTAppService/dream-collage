@@ -25,10 +25,21 @@ export type DeleteDream = {
 export type Dream = {
   __typename?: 'Dream';
   _id: Scalars['ID'];
-  image?: Maybe<Scalars['String']>;
+  image?: Maybe<DreamImageType>;
   name: Scalars['String'];
   rating?: Maybe<Scalars['Int']>;
   time?: Maybe<Scalars['String']>;
+};
+
+export type DreamImageInputType = {
+  contentType?: Maybe<Scalars['String']>;
+  dataURL?: Maybe<Scalars['String']>;
+};
+
+export type DreamImageType = {
+  __typename?: 'DreamImageType';
+  contentType?: Maybe<Scalars['String']>;
+  dataURL?: Maybe<Scalars['String']>;
 };
 
 export type RootMutationType = {
@@ -39,6 +50,7 @@ export type RootMutationType = {
 };
 
 export type RootMutationTypecreateDreamArgs = {
+  image?: Maybe<DreamImageInputType>;
   name: Scalars['String'];
   rating?: Maybe<Scalars['Int']>;
   time?: Maybe<Scalars['String']>;
@@ -50,6 +62,7 @@ export type RootMutationTypedeleteDreamArgs = {
 
 export type RootMutationTypeupdateDreamArgs = {
   _id: Scalars['ID'];
+  image?: Maybe<DreamImageInputType>;
   name: Scalars['String'];
   rating?: Maybe<Scalars['Int']>;
   time?: Maybe<Scalars['String']>;

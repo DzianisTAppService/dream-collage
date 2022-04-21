@@ -21,7 +21,7 @@ mongoose.connection
   .on("error", (error) => console.log("Error connecting to MongoLab:", error));
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "50mb" }));
 app.use(
   "/graphql",
   graphqlHTTP({

@@ -7,6 +7,7 @@ export type CreateDreamMutationVariables = Types.Exact<{
   name: Types.Scalars['String'];
   time?: Types.Maybe<Types.Scalars['String']>;
   rating?: Types.Maybe<Types.Scalars['Int']>;
+  image?: Types.Maybe<Types.DreamImageInputType>;
 }>;
 
 export type CreateDreamMutation = {
@@ -18,18 +19,33 @@ export type CreateDreamMutation = {
         name: string;
         time?: string | null | undefined;
         rating?: number | null | undefined;
+        image?:
+          | {
+              __typename?: 'DreamImageType';
+              dataURL?: string | null | undefined;
+            }
+          | null
+          | undefined;
       }
     | null
     | undefined;
 };
 
 export const CreateDreamDocument = gql`
-  mutation CreateDream($name: String!, $time: String, $rating: Int) {
-    createDream(name: $name, time: $time, rating: $rating) {
+  mutation CreateDream(
+    $name: String!
+    $time: String
+    $rating: Int
+    $image: DreamImageInputType
+  ) {
+    createDream(name: $name, time: $time, rating: $rating, image: $image) {
       _id
       name
       time
       rating
+      image {
+        dataURL
+      }
     }
   }
 `;
@@ -54,6 +70,7 @@ export type CreateDreamMutationFn = Apollo.MutationFunction<
  *      name: // value for 'name'
  *      time: // value for 'time'
  *      rating: // value for 'rating'
+ *      image: // value for 'image'
  *   },
  * });
  */

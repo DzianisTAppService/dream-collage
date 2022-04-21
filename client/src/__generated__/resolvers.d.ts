@@ -29,10 +29,21 @@ export type DeleteDream = {
 export type Dream = {
   __typename?: 'Dream';
   _id: Scalars['ID'];
-  image?: Maybe<Scalars['String']>;
+  image?: Maybe<DreamImageType>;
   name: Scalars['String'];
   rating?: Maybe<Scalars['Int']>;
   time?: Maybe<Scalars['String']>;
+};
+
+export type DreamImageInputType = {
+  contentType?: Maybe<Scalars['String']>;
+  dataURL?: Maybe<Scalars['String']>;
+};
+
+export type DreamImageType = {
+  __typename?: 'DreamImageType';
+  contentType?: Maybe<Scalars['String']>;
+  dataURL?: Maybe<Scalars['String']>;
 };
 
 export type RootMutationType = {
@@ -43,6 +54,7 @@ export type RootMutationType = {
 };
 
 export type RootMutationTypecreateDreamArgs = {
+  image?: Maybe<DreamImageInputType>;
   name: Scalars['String'];
   rating?: Maybe<Scalars['Int']>;
   time?: Maybe<Scalars['String']>;
@@ -54,6 +66,7 @@ export type RootMutationTypedeleteDreamArgs = {
 
 export type RootMutationTypeupdateDreamArgs = {
   _id: Scalars['ID'];
+  image?: Maybe<DreamImageInputType>;
   name: Scalars['String'];
   rating?: Maybe<Scalars['Int']>;
   time?: Maybe<Scalars['String']>;
@@ -179,6 +192,8 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   DeleteDream: ResolverTypeWrapper<DeleteDream>;
   Dream: ResolverTypeWrapper<Dream>;
+  DreamImageInputType: DreamImageInputType;
+  DreamImageType: ResolverTypeWrapper<DreamImageType>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   RootMutationType: ResolverTypeWrapper<{}>;
@@ -191,6 +206,8 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   DeleteDream: DeleteDream;
   Dream: Dream;
+  DreamImageInputType: DreamImageInputType;
+  DreamImageType: DreamImageType;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
   RootMutationType: {};
@@ -215,10 +232,27 @@ export type DreamResolvers<
   ParentType extends ResolversParentTypes['Dream'] = ResolversParentTypes['Dream']
 > = {
   _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  image?: Resolver<
+    Maybe<ResolversTypes['DreamImageType']>,
+    ParentType,
+    ContextType
+  >;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   rating?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   time?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DreamImageTypeResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['DreamImageType'] = ResolversParentTypes['DreamImageType']
+> = {
+  contentType?: Resolver<
+    Maybe<ResolversTypes['String']>,
+    ParentType,
+    ContextType
+  >;
+  dataURL?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -266,6 +300,7 @@ export type RootQueryTypeResolvers<
 export type Resolvers<ContextType = any> = {
   DeleteDream?: DeleteDreamResolvers<ContextType>;
   Dream?: DreamResolvers<ContextType>;
+  DreamImageType?: DreamImageTypeResolvers<ContextType>;
   RootMutationType?: RootMutationTypeResolvers<ContextType>;
   RootQueryType?: RootQueryTypeResolvers<ContextType>;
 };

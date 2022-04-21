@@ -4,6 +4,9 @@ query DreamsQuery {
         name
         time
         rating
-        image
+        image {
+            dataURL
+            contentType
+        }
     }
 }

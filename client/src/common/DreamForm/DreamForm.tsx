@@ -38,6 +38,7 @@ const schema = yup.object().shape({
       return value;
     }),
   time: yup.date().min(new Date(), 'Please choose future date').nullable(),
+  image: yup.mixed().nullable(),
 });
 
 const DreamForm: FC<DreamFormProps> = ({
@@ -64,9 +65,18 @@ const DreamForm: FC<DreamFormProps> = ({
   const handleBackToDreams = () => navigate(PATHS.dreams);
 
   const onSubmit = async (data: FormData): Promise<void> => {
+    const prepareData = () => {
+      const preparedData = updateStatus ? { id, ...data } : data;
+      const { image } = data;
+
+      return Array.isArray(image) && image.length
+        ? { ...preparedData, image: { dataURL: image[0].dataURL } }
+        : preparedData;
+    };
+
     try {
       await mutation({
-        variables: updateStatus ? { id, ...data } : data,
+        variables: prepareData(),
       });
       handleBackToDreams();
     } catch (err) {

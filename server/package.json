@@ -11,6 +11,7 @@
     "graphql": "^15.6.1",
     "html-webpack-plugin": "^5.4.0",
     "mongoose": "^6.0.12",
+    "multer": "^1.4.4",
     "nodemon": "^2.0.14"
   },
   "scripts": {

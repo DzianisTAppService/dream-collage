@@ -1,8 +1,11 @@
-mutation CreateDream($name: String!, $time: String, $rating: Int) {
-	createDream(name: $name, time: $time, rating: $rating) {
+mutation CreateDream($name: String!, $time: String, $rating: Int, $image: DreamImageInputType) {
+	createDream(name: $name, time: $time, rating: $rating, image: $image) {
 		_id
 		name
 		time
 		rating
+		image {
+			dataURL
+		}
 	}
 }

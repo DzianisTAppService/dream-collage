@@ -31,12 +31,7 @@ const UploadField = () => {
             border="1px solid #0000003b"
             borderRadius={1}
           >
-            <ImageUploading
-              multiple
-              value={value}
-              onChange={onChange}
-              maxNumber={1}
-            >
+            <ImageUploading value={value} onChange={onChange} maxNumber={1}>
               {({
                 imageList,
                 onImageUpload,

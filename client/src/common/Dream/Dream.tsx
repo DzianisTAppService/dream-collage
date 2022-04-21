@@ -18,13 +18,13 @@ import Rating from 'common/Rating';
 
 import { Dream as DreamType } from '__generated__/types';
 
-interface Props {
+interface DreamProps {
   data: DreamType;
   deleteDream: () => void;
   updateDream: (data: Omit<DreamType, '_id'>) => Promise<void>;
 }
 
-const Dream: FC<Props> = ({
+const Dream: FC<DreamProps> = ({
   data,
   data: { _id: id, image },
   deleteDream,
@@ -73,7 +73,7 @@ const Dream: FC<Props> = ({
               borderRadius="3px"
             >
               <CardMedia
-                image={image || defaultPicture}
+                image={image?.dataURL || defaultPicture}
                 title={data.name}
                 style={{ height: '100%' }}
               />

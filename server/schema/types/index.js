@@ -1,4 +1,5 @@
 const graphql = require("graphql");
+const { GraphQLInputObjectType } = require("graphql");
 const {
   GraphQLObjectType,
   GraphQLString,
@@ -7,6 +8,14 @@ const {
   GraphQLNonNull,
 } = graphql;
 
+const DreamImageType = new GraphQLObjectType({
+  name: "DreamImageType",
+  fields: () => ({
+    dataURL: { type: GraphQLString },
+    contentType: { type: GraphQLString },
+  }),
+});
+
 const DreamType = new GraphQLObjectType({
   name: "Dream",
   fields: () => ({
@@ -14,7 +23,7 @@ const DreamType = new GraphQLObjectType({
     name: { type: new GraphQLNonNull(GraphQLString) },
     time: { type: GraphQLString },
     rating: { type: GraphQLInt },
-    image: { type: GraphQLString },
+    image: { type: DreamImageType },
   }),
 });
 
@@ -23,4 +32,19 @@ const DeleteDreamType = new GraphQLObjectType({
   fields: () => ({ deletedCount: { type: GraphQLInt } }),
 });
 
-module.exports = { DreamType, DeleteDreamType };
+//INPUT TYPES
+
+const DreamImageInputType = new GraphQLInputObjectType({
+  name: "DreamImageInputType",
+  fields: () => ({
+    dataURL: { type: GraphQLString },
+    contentType: { type: GraphQLString },
+  }),
+});
+
+module.exports = {
+  DreamType,
+  DeleteDreamType,
+  DreamImageType,
+  DreamImageInputType,
+};

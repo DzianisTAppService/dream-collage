@@ -15,7 +15,14 @@ export type DreamsQueryQuery = {
             name: string;
             time?: string | null | undefined;
             rating?: number | null | undefined;
-            image?: string | null | undefined;
+            image?:
+              | {
+                  __typename?: 'DreamImageType';
+                  dataURL?: string | null | undefined;
+                  contentType?: string | null | undefined;
+                }
+              | null
+              | undefined;
           }
         | null
         | undefined
@@ -31,7 +38,10 @@ export const DreamsQueryDocument = gql`
       name
       time
       rating
-      image
+      image {
+        dataURL
+        contentType
+      }
     }
   }
 `;
